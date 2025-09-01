@@ -45,7 +45,7 @@ client.on('conversation.updated', (event) => {
 });
 
 // Connect to Realtime API
-await client.connect();
+await client.connect({ model: 'gpt-realtime' });
 
 // Send a item and triggers a generation
 client.sendUserMessageContent([{ type: 'input_text', text: `How are you?` }]);

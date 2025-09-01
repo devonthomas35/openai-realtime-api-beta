@@ -162,9 +162,10 @@ export class RealtimeClient extends RealtimeEventHandler {
      * Create a new RealtimeClient instance
      * @param {{url?: string, apiKey?: string, dangerouslyAllowAPIKeyInBrowser?: boolean, debug?: boolean}} [settings]
      */
-    constructor({ url, apiKey, dangerouslyAllowAPIKeyInBrowser, debug }?: {
+    constructor({ url, apiKey, model, dangerouslyAllowAPIKeyInBrowser, debug }?: {
         url?: string;
         apiKey?: string;
+        model?: string;
         dangerouslyAllowAPIKeyInBrowser?: boolean;
         debug?: boolean;
     });
@@ -191,6 +192,7 @@ export class RealtimeClient extends RealtimeEventHandler {
         prefix_padding_ms: number;
         silence_duration_ms: number;
     };
+    model: string | null;
     realtime: RealtimeAPI;
     conversation: RealtimeConversation;
     /**
@@ -223,7 +225,7 @@ export class RealtimeClient extends RealtimeEventHandler {
      * Updates session config and conversation config
      * @returns {Promise<true>}
      */
-    connect(): Promise<true>;
+    connect({ model }?: { model?: string; }): Promise<true>;
     /**
      * Waits for a session.created event to be executed before proceeding
      * @returns {Promise<true>}

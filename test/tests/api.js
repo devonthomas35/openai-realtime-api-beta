@@ -25,6 +25,14 @@ export async function run() {
       expect(event.error.message).to.contain('Incorrect API key provided');
     });
 
+
+      it('Should allow overriding the model when connecting', async () => {
+        realtime.disconnect();
+        await realtime.connect({ model: 'gpt-realtime' });
+        expect(realtime.ws.url).to.contain('model=gpt-realtime');
+        realtime.disconnect();
+      });
+
     it('Should instantiate the RealtimeAPI', () => {
       realtime = new RealtimeAPI({
         apiKey: process.env.OPENAI_API_KEY,
